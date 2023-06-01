@@ -81,7 +81,7 @@ int main()
 		printf("%d\n",msgsock); 
 		printf("连接到新的客户端...\n"); 
 	}
-	char buf[2048] = { 0 };
+	char buf[2048] = { 0 };//大小应该大于1024！！！
 	printf("----------------SERVER----------------\n");
 	while(1)
 	{
