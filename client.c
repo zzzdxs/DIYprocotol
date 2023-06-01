@@ -38,7 +38,7 @@ char crc8_maxim(char *data, int length)//DS18B20
                 crc >>= 1;
         }
     }
-    printf("CRC=%02x\n",crc);
+    //printf("CRC=%02x\n",crc);
     return crc;
 }
 
@@ -75,16 +75,18 @@ int main()
 	ClientAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
 	connect(sock, (LPSOCKADDR)&ClientAddr, sizeof(ClientAddr));
+	printf("----------------CLIENT----------------\n");
 	while(1)
 	{
-		char snd_buf[1024] = { 0 };
-		message mmsg;
+		printf("--------NEW CLIENT INFO SENDING--------\n");
+		char snd_buf[2048] = { 0 };
 		//strcpy(msg.client_name, "lyshark");
 		//strcpy(msg.buffer, "bbbbbb");
-		printf("msg.client_name=\n");
+		printf("msg.client_name=");
 		gets(msg.header.clientaddr);
-		printf("msg.buffer=\n");
+		printf("msg.buffer=");
 		gets(msg.buffer);
+		printf("\n");
 		msg.header.DATALen=strlen(msg.buffer);
 		msg.header.HEAD=DIY_HEAD;
 		msg.CRC=crc8_maxim(msg.buffer,msg.header.DATALen);
@@ -92,21 +94,10 @@ int main()
 		print_msg(msg);
 		memcpy(snd_buf, &msg, sizeof(message));
 		send(sock, snd_buf, sizeof(snd_buf), 0);
-		printf("%x %d\n",snd_buf,strlen(snd_buf));
-
-		message *mmmsg=(message*)snd_buf;
-		print_msg((message)*mmmsg);
+		//printf("%x %d\n",snd_buf,strlen(snd_buf));
 		
-		sscanf(snd_buf,"%d,%s,%s,%s,%s",mmsg.header.DATALen, \
-		&mmsg.header.HEAD,&mmsg.header.clientaddr, mmsg.buffer,&mmsg.CRC);
-		/*
-		printf("%p  %p\n",&msg.buffer,&msg.CRC);
-		printf("%p  %p\n",&mmsg.buffer,&mmsg.CRC);
-		*/
-		print_msg(mmsg);
+		//printf("结构体打包前存储地址 buffer: %p  CRC: %p\n",&msg.buffer,&msg.CRC);
 	}
-
-	
 
 	closesocket(sock); 
 	WSACleanup();  
