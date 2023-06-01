@@ -1,7 +1,6 @@
 {
   "version": "0.2.0",
   "configurations": [
-    
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
@@ -21,7 +20,6 @@
         }
       ]
     },
-    
     {
       "name": "C/C++: gcc.exe 生成和调试活动文件",
       "type": "cppdbg",
