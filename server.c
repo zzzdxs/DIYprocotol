@@ -6,7 +6,7 @@
 #define ERROR 0  
 #define BUFFER_SIZE 1024
 #define DIY_HEAD 0x32
-#pragma pack(1) 
+#pragma pack(4) 
 
 
 typedef struct HEADER

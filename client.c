@@ -46,14 +46,11 @@ void print_msg(message msg)
 {
 	printf("msg.Header.HEAD: %x\n",msg.header.HEAD);
 	printf("msg.Header.clientaddr: ");
-	for(int i=0;i<strlen(msg.header.clientaddr);i++)
-	{
-		printf("%x",msg.header.clientaddr[i]);
-	}
-	printf("\n");
+	printf("%x\n",msg.header.clientaddr);
 	printf("msg.Header.DATALen: %x\n",msg.header.DATALen);
 	printf("msg.buffer: %x\n",msg.buffer);
 	printf("msg.RecvCRC: %02x\n",msg.CRC);
+	printf("\n");
 }
 
 message msg;
@@ -95,9 +92,17 @@ int main()
 		print_msg(msg);
 		memcpy(snd_buf, &msg, sizeof(message));
 		send(sock, snd_buf, sizeof(snd_buf), 0);
-		printf("%x\n",snd_buf);
-		sscanf(snd_buf,"%d,%s,%s,%s,%s",mmsg.header.DATALen,&mmsg.header.HEAD,&mmsg.header.clientaddr,  \
-		    mmsg.buffer[1024],&mmsg.CRC);
+		printf("%x %d\n",snd_buf,strlen(snd_buf));
+
+		message *mmmsg=(message*)snd_buf;
+		print_msg((message)*mmmsg);
+		
+		sscanf(snd_buf,"%d,%s,%s,%s,%s",mmsg.header.DATALen, \
+		&mmsg.header.HEAD,&mmsg.header.clientaddr, mmsg.buffer,&mmsg.CRC);
+		/*
+		printf("%p  %p\n",&msg.buffer,&msg.CRC);
+		printf("%p  %p\n",&mmsg.buffer,&mmsg.CRC);
+		*/
 		print_msg(mmsg);
 	}
 
