@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/STM32/0_devc/protocol/sr/multifiles",
-      "program": "d:/STM32/0_devc/protocol/sr/multifiles/build/Debug/outDebug",
+      "cwd": "d:/STM32/0_devc/protocol/sr/indefiles",
+      "program": "d:/STM32/0_devc/protocol/sr/indefiles/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
