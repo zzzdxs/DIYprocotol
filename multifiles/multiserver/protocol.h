@@ -1,5 +1,5 @@
 #ifndef PROTOCOL_H_
-#define PROCOTOL_H_
+#define PROTOCOL_H_
 
 #define PORT 15001
 #define ERROR 0  
